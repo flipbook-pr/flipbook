@@ -36,7 +36,7 @@
         .fbpS-logo i { color: var(--fbpS-accent); }
 
         .fbpS-upload-btn {
-            background: linear-gradient(135deg, #e67e22, #d35400); color: #fff;
+                        background: var(--primary-gradient); color: #fff;
             padding: 15px 40px; border-radius: 50px; cursor: pointer;
             font-family: var(--fbpS-text-bn); font-size: 18px; font-weight: 600; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
@@ -44,7 +44,7 @@
             display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
             text-decoration: none; margin-bottom: 40px;
         }
-        .fbpS-upload-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(230, 126, 34, 0.4); }
+        .fbpS-upload-btn:hover { transform: translateY(-5px);  }
         #fbpS-file-upload { display: none; }
 
         /* --- Library Grid --- */
