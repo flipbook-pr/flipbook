@@ -1,0 +1,354 @@
+/* =========================================
+           FlipBook Pro Scoped Styles
+        ========================================= */
+
+        #fbpH-root {
+            --fbpH-bg-dark: #1e272e;
+            --fbpH-accent: #f1c40f;
+            --fbpH-text-main: 'Poppins', sans-serif;
+            --fbpH-text-bn: 'Poppins', sans-serif;
+            --fbpH-footer-h: 60px;
+            --fbpH-overlay-bg: rgba(0, 0, 0, 0.9);
+            
+            font-family: var(--fbpH-text-main);
+            box-sizing: border-box;
+            line-height: 1.5;
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        #fbpH-root *, #fbpH-root *::before, #fbpH-root *::after { box-sizing: border-box; }
+
+        /* --- Landing Area --- */
+        .fbpH-landing { 
+            text-align: center; z-index: 10; transition: 0.3s; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow-y: auto; padding: 20px;
+        }
+        .fbpH-logo { color: white; font-size: 32px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .fbpH-logo i { color: var(--fbpH-accent); }
+
+        .fbpH-upload-btn {
+            background: var(--primary-gradient); color: #fff;
+            padding: 15px 40px; border-radius: 50px; cursor: pointer;
+            font-family: var(--fbpH-text-bn); font-size: 18px; font-weight: 600; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+            border: 2px solid rgba(255,255,255,0.1);
+            display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
+            text-decoration: none; margin-bottom: 40px;
+        }
+        .fbpH-upload-btn:hover { transform: translateY(-5px);  }
+        #fbpH-file-upload { display: none; }
+
+        /* --- Library Grid --- */
+        .fbpH-library-title {
+            font-family: var(--fbpH-text-bn); font-size: 22px; margin-bottom: 20px; 
+            border-bottom: 2px solid var(--fbpH-accent); padding-bottom: 5px; display: inline-block;
+        }
+        .fbpH-library-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 25px;
+            max-width: 1000px; width: 100%;
+        }
+        .fbpH-book-card {
+            width: 140px; cursor: pointer; transition: 0.3s; position: relative;
+        }
+        .fbpH-book-card:hover { transform: translateY(-10px); }
+        .fbpH-book-cover {
+            width: 100%; height: 200px; border-radius: 5px; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); border: 2px solid #444;
+            background: #333; display: flex; align-items: center; justify-content: center;
+        }
+        .fbpH-book-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .fbpH-book-cover i { font-size: 40px; color: #666; }
+        .fbpH-book-title {
+            margin-top: 10px; font-size: 14px; font-weight: 500; color: #ccc;
+            font-family: var(--fbpH-text-bn); text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+        }
+        .fbpH-book-card:hover .fbpH-book-cover { border-color:  rgba(255, 255, 255); }
+        .fbpH-book-card:hover .fbpH-book-title { color: #fff; }
+
+        /* --- Popup Overlay --- */
+        .fbpH-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--fbpH-overlay-bg); 
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none; flex-direction: column; opacity: 0; transition: opacity 0.5s ease;
+        }
+        .fbpH-overlay.active { opacity: 1; }
+
+        .fbpH-close-btn {
+            position: absolute; top: 15px; right: 25px;
+            color: #fff; font-size: 24px; cursor: pointer;
+            z-index: 10005; transition: 0.3s;
+            background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .fbpH-close-btn:hover { background: #c0392b; transform: rotate(90deg); }
+
+        /* --- Sidebar --- */
+        .fbpH-sidebar {
+            position: absolute; left: 0; top: 0; bottom: var(--fbpH-footer-h); 
+            width: 260px; 
+            background: rgba(20, 20, 20, 0.98); z-index: 10004;
+            transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-right: 1px solid #333;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.6);
+            text-align: left;
+            display: flex; flex-direction: column; overflow: hidden; padding: 0;
+        }
+        .fbpH-sidebar.active { transform: translateX(0); }
+
+        .fbpH-sidebar-header {
+            flex-shrink: 0; display: flex; justify-content: space-between; align-items: center;
+            padding: 20px; border-bottom: 1px solid #333;
+            background: rgba(25, 25, 25, 1); color: white; 
+            font-family: var(--fbpH-text-bn); font-size: 18px; z-index: 2;
+        }
+        #fbpH-thumb-container { flex-grow: 1; overflow-y: auto; padding: 15px; }
+        #fbpH-thumb-container::-webkit-scrollbar { width: 6px; }
+        #fbpH-thumb-container::-webkit-scrollbar-track { background: #222; }
+        #fbpH-thumb-container::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+        .fbpH-sidebar-close-icon {
+            cursor: pointer; color: #aaa; transition: 0.2s; font-size: 20px;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: rgba(255,255,255,0.08);
+        }
+        .fbpH-sidebar-close-icon:hover { color: #f1c40f; background: rgba(255,255,255,0.15); transform: rotate(90deg); }
+
+        .fbpH-thumb-item { 
+            cursor: pointer; 
+            margin-bottom: 25px; 
+            text-align: center; 
+            opacity: 0.85; 
+            transition: all 0.2s ease; 
+        }
+        .fbpH-thumb-item:hover, .fbpH-thumb-item.active { 
+            opacity: 1; 
+            transform: translateY(-3px); 
+        }
+        .fbpH-thumb-item canvas, .fbpH-thumb-item img { 
+            width: 100%; height: auto;
+            border-radius: 5px; 
+            border: 2px solid #444; 
+            display: block; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .fbpH-thumb-item.active canvas { 
+            border-color: var(--fbpH-accent); 
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+        }
+        .fbpH-thumb-label { color: #aaa; font-size: 12px; margin-top: 6px; font-weight: 500; }
+
+        /* --- Book Stage --- */
+        .fbpH-stage {
+            position: absolute; top: 0; left: 0; width: 100%;
+            height: calc(100% - var(--fbpH-footer-h)); 
+            display: flex; justify-content: center; align-items: center;
+            perspective: 2500px; overflow: hidden; 
+            cursor: grab;
+            /* IMPORTANT: Allow events for selection */
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
+        .fbpH-stage.grabbing { cursor: grabbing !important; }
+
+        .fbpH-zoom-layer {
+            transform-origin: center center;
+            display: flex; justify-content: center; align-items: center;
+            position: absolute; 
+            will-change: transform; 
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .fbpH-zoom-layer.no-transition { transition: none !important; }
+
+        .stf__wrapper { box-shadow: 0 25px 60px rgba(0,0,0,0.7) !important; }
+
+        /* --- Controls --- */
+        .fbpH-controls {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: var(--fbpH-footer-h); 
+            background: rgba(15, 15, 15, 0.95); border-top: 1px solid #333;
+            display: flex; align-items: center; justify-content: center; gap: 15px; 
+            z-index: 10005; 
+            transform: translateY(100%); transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            margin: 0; padding: 0;
+        }
+        .fbpH-controls.active { transform: translateY(0); }
+
+        .fbpH-btn {
+            background: transparent; border: none; color: #ccc; 
+            font-size: 18px; width: 45px; height: 45px; border-radius: 8px;
+            cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .fbpH-btn:hover { background: #333; color: #fff; transform: translateY(-2px); }
+        .fbpH-btn.active-btn { color: #111; background: var(--fbpH-accent); box-shadow: 0 0 10px var(--fbpH-accent); }
+        .fbpH-divider { width: 1px; height: 25px; background: #333; margin: 0 5px; }
+
+        .fbpH-page-input {
+            width: 50px; background: #222; border: 1px solid #444; 
+            padding: 8px 0; border-radius: 4px; color: #fff; font-family: var(--fbpH-text-main); font-weight: 600;
+            font-size: 14px; text-align: center; outline: none; margin: 0;
+        }
+        .fbpH-total-page { color: #777; font-size: 13px; font-weight: 500; margin-left: 8px; margin-right: 5px; }
+
+        /* --- Floating Arrows --- */
+        .fbpH-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 60px; height: 100px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 40px; cursor: pointer; z-index: 10003;
+            transition: all 0.3s ease; user-select: none;
+            background: rgba(0,0,0,0.0); border-radius: 10px;
+        }
+        .fbpH-arrow:hover { 
+            background: rgba(0,0,0,0.3); color: var(--fbpH-accent); 
+            transform: translateY(-50%) scale(1.1);
+        }
+        .fbpH-prev { left: 20px; }
+        .fbpH-next { right: 20px; }
+
+        @media (max-width: 650px) {
+            .fbpH-controls { gap: 5px; padding: 0 10px; justify-content: space-between; }
+            .fbpH-sidebar { width: 100%; max-width: 250px; }
+            .fbpH-divider { display: none; }
+            .fbpH-arrow { width: 40px; height: 60px; font-size: 25px; background: rgba(0,0,0,0.2); }
+            .fbpH-prev { left: 5px; }
+            .fbpH-next { right: 5px; }
+        }
+
+        /* --- Loader & Toast --- */
+        .fbpH-loader-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 11000;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .fbpH-loader {
+            width: 50px; height: 50px; border: 4px solid #333; border-top-color: var(--fbpH-accent);
+            border-radius: 50%; animation: fbpH-spin 0.8s infinite linear;
+        }
+        .fbpH-loader-text { color: #ccc; margin-top: 20px; font-family: var(--fbpH-text-bn); font-size: 18px; }
+        @keyframes fbpH-spin { 100% { transform: rotate(360deg); } }
+
+        .fbpH-toast {
+            position: fixed; top: 80px; right: 20px; background: var(--fbpH-accent); color: #111;
+            padding: 10px 25px; border-radius: 5px; opacity: 0; transition: 0.4s; z-index: 12000;
+            font-family: var(--fbpH-text-bn); font-weight: 700; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        .fbpH-toast.show { opacity: 1; transform: translateY(10px); }
+
+        /* =========================================
+           CORE INTERACTION LAYERS (Fixed for Selection)
+        ========================================= */
+
+        /* 1. Page Container */
+        .fbpH-page { 
+            background-color: #ffffff; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            pointer-events: auto !important;
+            
+            backface-visibility: hidden;
+            transform: translate3d(0, 0, 0); 
+            will-change: transform;          
+        }
+
+        /* 2. Canvas (Image) - Layer 1 (Bottom) */
+        /* FIX: Canvas must pass events through to Text Layer */
+        .fbpH-page canvas { 
+            position: absolute;
+            top: 0; left: 0;
+            width: 100% !important; height: 100% !important; 
+            object-fit: fill; display: block;
+            z-index: 1; 
+            pointer-events: none !important; /* Critical Fix */
+        }
+
+        /* 3. Text Layer - Layer 5 (Middle) */
+        .textLayer {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 10;
+            opacity: 1; 
+            mix-blend-mode: normal; 
+            pointer-events: auto !important; /* Critical Fix: Allow clicks */
+            line-height: 1.0;
+        }
+
+        /* 4. Invisible Text for Selection */
+        .textLayer > span {
+            color: transparent !important;
+            position: absolute;
+            white-space: pre;
+            cursor: text;
+            transform-origin: 0% 0%;
+        }
+
+        /* 5. Blue Selection Highlight */
+        .textLayer ::selection { 
+            background: rgba(0, 110, 255, 0.3); 
+            color: transparent;
+        }
+
+/* --- Annotation/Link Layer Fix --- */
+.annotationLayer {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 100; /* টেক্সট লেয়ারের (১০) উপরে থাকতে হবে */
+    pointer-events: none; /* পুরো লেয়ার ক্লিক আটকাবে না */
+}
+
+.annotationLayer .linkAnnotation {
+    position: absolute;
+    z-index: 101; /* লিংকের সেকশন সবার উপরে */
+    cursor: pointer !important;
+    pointer-events: auto !important; /* শুধুমাত্র লিংক এরিয়া ক্লিক গ্রহণ করবে */
+    border: 1px solid transparent; /* ডিবাগিং-এর জন্য সুবিধা, স্বচ্ছ রাখা ভালো */
+}
+
+.annotationLayer .linkAnnotation > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: rgba(0, 255, 255, 0); /* লিংকের উপর মাউস নিলে হালকা কালার চাইলে এখানে দিতে পারেন */
+}
+
+/* হোভার এফেক্ট (ঐচ্ছিক) - যাতে বোঝা যায় এখানে লিংক আছে */
+.annotationLayer .linkAnnotation > a:hover {
+    background: rgba(255, 255, 0, 0.2); 
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+        /* --- Performance Fix --- */
+        /* Hide text only during folding/turning to prevent lag */
+        .stf__item.-folding .textLayer,
+        .stf__item.-turning .textLayer {
+            display: none !important;
+        }
+
+        /* Ensure hardware acceleration */
+        .fbpH-page {
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+		
+		
+		
+/* ড্র্যাগ করার সময় টেক্সট সিলেকশন বন্ধ রাখার জন্য */
+.fbpH-grabbing-mode * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}		
